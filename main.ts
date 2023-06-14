@@ -17,7 +17,17 @@ export default class ExamplePlugin extends Plugin {
 				// console.log(content);
 				this.updateLineCount(content);
 			}
+			else
+			{
+				this.updateLineCount(undefined);
+			}
 		});
+
+
+		this.app.workspace.on('editor-change', editor => {
+			const content = editor.getDoc().getValue();
+			this.updateLineCount(content);
+		})
 	}
 
 	private updateLineCount(fileContent?: string)
